@@ -243,7 +243,7 @@ class SchneiderElectric_iEM3255():
 		return self._modbusRead('TotalApparentPW')*1000
 
 	def bysec_value(self, x, size=16):
-		val_shift = size/2
+		val_shift = int(size/2)
 		if size == 8:
 			val_mask = 0xf
 		else:
@@ -262,7 +262,7 @@ class SchneiderElectric_iEM3255():
 		seconds = int(self._modbusRead("MS")) / 1000
 
 		log.warn("read YYYY=%s MM=%s DD=%s HH=%s MM=%s SS=%s" % (year, month, day, hours, minutes, seconds))
-		date = datetime.datetime(year, month, day, hours, minutes, seconds)
+		date = datetime.datetime(int(year), int(month), int(day), int(hours), int(minutes), int(seconds))
 		log.warn("data: %s" % date)
 		return date
 

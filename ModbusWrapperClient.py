@@ -134,7 +134,7 @@ class ModbusWrapperClient():
 		return result
 
 	def encode_field(self, value, mb_type='unit16'):
-		builder = BinaryPayloadBuilder(endian=self.endian)
+		builder = BinaryPayloadBuilder(byteorder=self.endian)
 		if mb_type == 'bit' or mb_type == 'bits':
 			builder.add_bits(value)
 		elif mb_type == 'uint8':
@@ -176,19 +176,19 @@ class ModbusWrapperClient():
 		if mb_funcall == 1:
 			# Read Coil Status (FC=01)
 			log.debug("decoder FC1 (raw: %s)" % raw)
-			decoder = BinaryPayloadDecoder.fromCoils(raw, endian=self.endian)
+			decoder = BinaryPayloadDecoder.fromCoils(raw, byteorder=self.endian)
 		elif mb_funcall == 2:
 			# Read Discrete Input (FC=02)
 			log.debug("decoder FC2 (raw: %s)" % raw)
-			decoder = BinaryPayloadDecoder(raw, endian=self.endian)
+			decoder = BinaryPayloadDecoder(raw, byteorder=self.endian)
 		elif mb_funcall == 3:
 			# Read Holding Registers (FC=03)
 			log.debug("decoder FC3 (raw: %s)" % raw)
-			decoder = BinaryPayloadDecoder.fromRegisters(raw, endian=self.endian)
+			decoder = BinaryPayloadDecoder.fromRegisters(raw, byteorder=self.endian)
 		elif mb_funcall == 4:
 			# Read Input Registers (FC=04)
 			log.debug("decoder stub FC4 (raw: %s)" % raw)
-			decoder = BinaryPayloadDecoder(raw, endian=self.endian)
+			decoder = BinaryPayloadDecoder(raw, byteorder=self.endian)
 		else:
 			log.debug("Function call not supported: %s" % mb_funcall)
 			decoder = None

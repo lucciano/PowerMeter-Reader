@@ -17,7 +17,7 @@ def main():
 		PM_config['endian'], PM_config['addressoffset'], 
 		PM_cacheEnabled, PM_config['base_commands'])
 
-	print("Connesso? %s" % pm.mb.isConnected)
+	print("Connected? %s" % pm.mb.isConnected)
 
 	print("--------------------------------------")
 	print(" SETTINGS ")
@@ -46,11 +46,5 @@ def main():
 	l3 = pm.readL3Voltage()
 	print("line 1: %s 2: %s 3: %s" % (l1, l2, l3))
 
-	print("--------------------------------------")
-	print(" COMMAND")
-	print("date: %s" % pm.read_date_time())
-	pm.cmd_set_date_time()
-	print("date: %s" % pm.read_date_time())
-	
 if __name__ == '__main__':
 	main()
